@@ -10,16 +10,18 @@ class Completedtasks extends Component
 {
     public $completedTasks;
 
-    public function mount() {
+    public function mount()
+    {
         $this->loadCompletedTasks();
     }
 
-    public function loadCompletedTasks() {
-        $this->completedTasks = Task::all();
+    public function loadCompletedTasks()
+    {
+        $this->completedTasks = Task::where("completed", true)->get();
     }
 
     public function render()
     {
-        return view('livewire.completedtasks');
+        return view('livewire.completedtasks')->layout("layouts.app");
     }
 }

@@ -15,8 +15,12 @@ class Tasks extends Component
     //монтирование компонента
     public function mount()
     {
-        $this->tasks = Task::all();
+        $this->loadTasks();
         $this->updateRemainingTime();
+    }
+
+    private function loadTasks() {
+        $this->tasks = Task::where("completed", false)->get();
     }
 
     public function saveTask()
@@ -31,7 +35,7 @@ class Tasks extends Component
         Task::create($validated);
 
         $this->resetInputFields();
-        $this->tasks = Task::all();
+        $this->loadTasks();
         $this->updateRemainingTime();
     }
 
@@ -62,7 +66,7 @@ class Tasks extends Component
         }
 
         $this->resetInputFields();
-        $this->tasks = Task::all();
+        $this->loadTasks();
         $this->updateRemainingTime();
     }
 
@@ -71,7 +75,15 @@ class Tasks extends Component
         $task = Task::find($id);
         if ($task) {
             $task->delete();
-            $this->tasks = Task::all();
+            $this->loadTasks();
+        }
+    }
+
+    public function completeTask($id) {
+        $task = Task::find($id);
+        if($task) {
+            $task->update(["completed" => true]);
+            $this->loadTasks();
         }
     }
 
@@ -107,6 +119,6 @@ class Tasks extends Component
     public function render()
     {
         $this->updateRemainingTime();
-        return view('livewire.tasks');
+        return view('livewire.tasks')->layout("layouts.app");
     }
 }

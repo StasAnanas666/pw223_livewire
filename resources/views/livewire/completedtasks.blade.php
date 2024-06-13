@@ -8,13 +8,19 @@
                 <th class="w-75">Описание</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($completedTasks as $task)
-            <tr class="{{$task->priority == 1 ? 'table-success' : ($task->priority == 2 ? 'table-warning' : 'table-danger')}}">
-                    <td>{{$task->title}}</td>
-                    <td>{{$task->description}}</td>
+        <tbody>            
+            @if ($completedTasks->count() == 0)
+                <tr>
+                    <td colspan="2" class="text-center">Нет завершенных задач</td>
                 </tr>
-            @endforeach
+            @else
+                @foreach ($completedTasks as $task)
+                    <tr class="{{$task->priority == 1 ? 'table-success' : ($task->priority == 2 ? 'table-warning' : 'table-danger')}}">
+                        <td>{{$task->title}}</td>
+                        <td>{{$task->description}}</td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
 </div>

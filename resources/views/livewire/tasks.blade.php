@@ -56,12 +56,17 @@
                     <td>{{$task->description}}</td>
                     <td><span wire:poll.500ms>{{$task->remaining_time}}</span></td>
                     <td>
-                        <button class="btn btn-sm btn-outline-warning me-3" wire:click="editTask({{$task->id}})">
+                        <button class="btn btn-sm btn-success me-3" wire:click="completeTask({{$task->id}})">
                             <span class="material-symbols-outlined">
+                                check
+                            </span>
+                        </button>
+                        <button class="btn btn-sm btn-warning me-3" wire:click="editTask({{$task->id}})">
+                            <span class="material-symbols-outlined text-light">
                                 edit
                             </span>
                         </button>
-                        <button class="btn btn-sm btn-outline-danger" wire:click="deleteTask({{$task->id}})">
+                        <button class="btn btn-sm btn-danger" wire:click="deleteTask({{$task->id}})">
                             <span class="material-symbols-outlined">
                                 delete
                             </span>

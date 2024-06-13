@@ -14,15 +14,17 @@
     <nav class="mb-5 bg-dark py-3 sticky-top">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="nav-link text-light" href="{{url("/")}}">Задачи</a>
+              <a class="nav-link text-light" href="{{route("tasks")}}" wire:navigate>Задачи</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" href="{{url("/completed-tasks")}}">Выполненные задачи</a>
+              <a class="nav-link text-light" href="{{route("completed-tasks")}}" wire:navigate>Выполненные задачи</a>
             </li>
           </ul>
     </nav>
 
-    @yield('content')
+    <main>
+      {{$slot}}
+    </main>
 
     
     @livewireScripts

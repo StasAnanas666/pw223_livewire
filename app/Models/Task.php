@@ -11,5 +11,5 @@ class Task extends Model
 
     protected $primaryKey = "id";
     protected $table = "tasks";
-    protected $fillable = ["title", "description", "priority", "deadline"];
+    protected $fillable = ["title", "description", "priority", "deadline", "completed", "overdate"];
 }
